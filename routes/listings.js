@@ -10,7 +10,10 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-router.get('/listings/new', requireAuth, (req, res) => res.render('listing_form'));
+router.get('/listings/new', requireAuth, (req, res) => {
+  res.render('listing_form', { user: req.session.user || null });
+});
+
 
 router.post('/listings', requireAuth, upload.single('image'), async (req, res) => {
   const { title, description, price, category, condition } = req.body;
@@ -28,7 +31,7 @@ router.get('/listings/:id', async (req, res) => {
       'SELECT l.*, u.name AS seller_name FROM listings l JOIN users u ON l.user_id = u.id WHERE l.id = ?',
       [req.params.id]
     );
-    res.render('listing_detail', { listing: rows[0], user: req.session.user });
+    res.render('listing_detail', { listing: rows[0], user: req.session.user || null 
   } catch (err) {
     res.status(404).send('Listing not found');
   }
