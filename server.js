@@ -25,11 +25,9 @@ app.use('/', listingRoutes);
 app.get('/', async (req, res) => {
   try {
     const db = require('./config/db');
-
-    // Text typed in search box: /?q=iphone
     const q = req.query.q || '';
+    const category = req.query.category || '';
 
-    // Base query: get active listings + seller name
     let sql = `
       SELECT l.*, u.name AS seller_name 
       FROM listings l 
@@ -38,23 +36,24 @@ app.get('/', async (req, res) => {
     `;
     const params = [];
 
-    // If user typed something, add WHERE conditions
     if (q) {
-      sql += ` AND (l.title LIKE ? OR l.category LIKE ? OR l.description LIKE ?)`;
+      sql += ' AND (l.title LIKE ? OR l.category LIKE ? OR l.description LIKE ?)';
       params.push(`%${q}%`, `%${q}%`, `%${q}%`);
     }
 
-    sql += ` ORDER BY l.created_at DESC`;
+    if (category && category !== 'All') {
+      sql += ' AND l.category = ?';
+      params.push(category);
+    }
+
+    sql += ' ORDER BY l.created_at DESC';
 
     const [listings] = await db.execute(sql, params);
-
-    // Pass q to the view so input can show current search text
-    res.render('index', { user: req.session.user, listings, q });
+    res.render('index', { user: req.session.user, listings, q, category });
   } catch (err) {
     res.status(500).send('Database error: ' + err.message);
   }
 });
-
 
 
 app.listen(PORT, () => {

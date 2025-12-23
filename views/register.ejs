@@ -6,16 +6,24 @@
 </head>
 <body>
   <nav>
-    <h1>🏫 CampusCircle Mart</h1>
-    <a href="/">← Home</a>
-  </nav>
-  
+  <h1>🏫 CampusCircle Mart</h1>
+  <div>
+    <a href="/">Home</a>
+    <% if (user) { %>
+      <a href="/my-listings">My Listings</a>
+      <a href="/listings/new">Sell Item</a>
+      <span>👋 <%= user.name %></span>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>
+
   <div class="form-container">
     <h2>📝 Create Account</h2>
-    <% if (typeof error !== 'undefined' && error) { %>
-  <p style="color:red"><%= error %></p>
-<% } %>
-
+    <% if(error) { %><p style="color:red"><%= error %></p><% } %>
     
     <form method="POST">
       <input name="name" placeholder="Rahul Sharma" required>

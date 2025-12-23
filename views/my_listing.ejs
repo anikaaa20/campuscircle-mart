@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Listings - CampusCircle Mart</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav>
+  <h1>🏫 CampusCircle Mart</h1>
+  <div>
+    <a href="/">Home</a>
+    <% if (user) { %>
+      <a href="/my-listings">My Listings</a>
+      <a href="/listings/new">Sell Item</a>
+      <span>👋 <%= user.name %></span>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>
+
+
+  <main>
+    <h2>🧾 My Listings</h2>
+
+    <% if (listings.length === 0) { %>
+      <p>You haven't posted anything yet. <a href="/listings/new">Sell your first item →</a></p>
+    <% } else { %>
+      <div class="listings-grid">
+        <% listings.forEach(l => { %>
+          <div class="listing-card">
+            <h3><a href="/listings/<%= l.id %>"><%= l.title %></a></h3>
+            <p><strong>₹<%= l.price %></strong> • <%= l.category %> • <%= l.item_condition %></p>
+            <p>Status: <%= l.status %></p>
+            <form method="POST" action="/listings/<%= l.id %>/mark-sold">
+              <% if (l.status === 'active') { %>
+                <button type="submit">Mark as Sold</button>
+              <% } else { %>
+                <button type="submit" disabled>Already Sold</button>
+              <% } %>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

@@ -5,11 +5,22 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <nav>
-    <h1>🏫 CampusCircle Mart</h1>
-    <a href="/">← Home</a>
-  </nav>
-  
+    <nav>
+  <h1>🏫 CampusCircle Mart</h1>
+  <div>
+    <a href="/">Home</a>
+    <% if (user) { %>
+      <a href="/my-listings">My Listings</a>
+      <a href="/listings/new">Sell Item</a>
+      <span>👋 <%= user.name %></span>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+</nav>
+
   <div class="form-container">
     <h2>📦 Sell Item</h2>
     

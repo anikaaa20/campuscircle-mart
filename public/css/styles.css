@@ -4,8 +4,8 @@
   margin-bottom: 1.5rem;
 }
 
-.search-bar input[type="text"] {
-  flex: 1;
+.search-bar input[type="text"],
+.search-bar select {
   padding: 0.7rem 0.9rem;
   border-radius: 999px;
   border: 1px solid #1f2937;
@@ -13,10 +13,19 @@
   color: #e5e7eb;
 }
 
+.search-bar input[type="text"] {
+  flex: 1;
+}
+
+.search-bar select {
+  min-width: 160px;
+}
+
 .search-bar button {
   width: auto;
   padding-inline: 1.5rem;
 }
+
 
 * {
   margin: 0;

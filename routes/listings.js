@@ -34,4 +34,27 @@ router.get('/listings/:id', async (req, res) => {
   }
 });
 
+router.get('/my-listings', requireAuth, async (req, res) => {
+  const userId = req.session.user.id;
+
+  const [rows] = await db.execute(
+    'SELECT * FROM listings WHERE user_id = ? ORDER BY created_at DESC',
+    [userId]
+  );
+
+  res.render('my_listings', { user: req.session.user, listings: rows });
+});
+
+router.post('/listings/:id/mark-sold', requireAuth, async (req, res) => {
+  const listingId = req.params.id;
+  const userId = req.session.user.id;
+
+  await db.execute(
+    'UPDATE listings SET status = "sold" WHERE id = ? AND user_id = ?',
+    [listingId, userId]
+  );
+
+  res.redirect('/my-listings');
+});
+
 module.exports = router;

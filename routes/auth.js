@@ -3,8 +3,14 @@ const bcrypt = require('bcryptjs');
 const db = require('../config/db');
 const router = express.Router();
 
-router.get('/register', (req, res) => res.render('register', { error: null }));
-router.get('/login', (req, res) => res.render('login'));
+router.get('/register', (req, res) => {
+  res.render('register', { error: null, user: req.session.user || null });
+});
+
+router.get('/login', (req, res) => {
+  res.render('login', { error: null, user: req.session.user || null });
+});
+
 
 router.post('/register', async (req, res) => {
   try {
@@ -16,7 +22,7 @@ router.post('/register', async (req, res) => {
     );
     res.redirect('/login');
   } catch (err) {
-    res.render('register', { error: 'Email already exists!' });
+    res.render('register', { error: 'Email already exists!', user: req.session.user || null });
   }
 });
 
@@ -28,7 +34,7 @@ router.post('/login', async (req, res) => {
       req.session.user = { id: rows[0].id, name: rows[0].name };
       res.redirect('/');
     } else {
-      res.render('login', { error: 'Wrong email/password!' });
+      res.render('login', { error: 'Wrong email/password!', user: req.session.user || null });
     }
   } catch (err) {
     res.status(500).send('Server error');
