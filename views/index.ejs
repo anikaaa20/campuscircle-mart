@@ -21,6 +21,23 @@
   </div>
 </nav>
 
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Buy & sell within your campus</h2>
+      <p>Pre‑loved books, electronics, and hostel essentials from verified students. No delivery fees, just quick campus meetups.</p>
+      <div class="hero-actions">
+        <a href="/listings/new" class="btn-primary">Sell an item</a>
+        <a href="#listings" class="btn-secondary">Browse listings</a>
+      </div>
+    </div>
+  </section>
+
+    <section class="trust-strip">
+    <span>✅ Only verified students</span>
+    <span>💸 Meet on campus, pay via UPI/cash</span>
+    <span>♻️ Reduce waste by reusing books & gadgets</span>
+  </section>
+
 
 
   <main>
@@ -44,7 +61,8 @@
 
 
 
-    <h2>📦 Latest Listings</h2>
+       <h2 id="listings">📦 Latest Listings</h2>
+
     <% if(listings.length === 0) { %>
       <p>No listings yet. <a href="/register">Create account</a> to start selling!</p>
     <% } else { %>
@@ -58,6 +76,28 @@
         <% }) %>
       </div>
     <% } %>
+
+        <section class="story">
+      <h3>Why CampusCircle Mart?</h3>
+      <p>Every semester, students struggle to buy and sell used items through random groups or expensive delivery apps.</p>
+      <p>CampusCircle Mart connects only verified students so you can safely trade within your college—saving money and reducing waste.</p>
+    </section>
+
+
+        <section class="perks">
+      <h3>Student perks</h3>
+      <ul>
+        <li>No commission or listing fees for students.</li>
+        <li>Highlight eco‑friendly trades (reuse and donate items).</li>
+        <li>Discover free / giveaway items under ₹0 listings.</li>
+      </ul>
+    </section>
+
   </main>
+  
+    <footer class="footer">
+    <p>Need help? Contact the CampusCircle Mart team at <span>support@yourcollege.edu</span></p>
+  </footer>
+
 </body>
 </html>
