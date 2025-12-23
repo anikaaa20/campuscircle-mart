@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CampusCircle Mart</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav>
+    <h1>🏫 CampusCircle Mart</h1>
+    <% if(user) { %>
+      <div>
+        👋 <%= user.name %> | 
+        <a href="/listings/new">+ Sell Item</a> | 
+        <a href="/logout">Logout</a>
+      </div>
+    <% } else { %>
+      <a href="/register">Register</a> | 
+      <a href="/login">Login</a>
+    <% } %>
+  </nav>
+
+  <main>
+    <h2>📦 Latest Listings</h2>
+    <% if(listings.length === 0) { %>
+      <p>No listings yet. <a href="/register">Create account</a> to start selling!</p>
+    <% } else { %>
+      <div class="listings-grid">
+        <% listings.forEach(listing => { %>
+          <div class="listing-card">
+            <h3><a href="/listings/<%= listing.id %>"><%= listing.title %></a></h3>
+            <p><strong>₹<%= listing.price %></strong> • <%= listing.category %> • <%= listing.item_condition %></p>
+            <small>by <%= listing.seller_name %></small>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </main>
+</body>
+</html>

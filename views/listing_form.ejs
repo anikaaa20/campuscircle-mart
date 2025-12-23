@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Listing - CampusCircle Mart</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav>
+    <h1>🏫 CampusCircle Mart</h1>
+    <a href="/">← Home</a>
+  </nav>
+  
+  <div class="form-container">
+    <h2>📦 Sell Item</h2>
+    
+   <form action="/listings" method="POST" enctype="multipart/form-data">
+
+      <input name="title" placeholder="iPhone 12 Pro" required>
+      <textarea name="description" placeholder="Good condition, 1 year old..." required></textarea>
+      <input name="price" type="number" placeholder="15000" step="0.01" required>
+      
+      <select name="category" required>
+        <option value="">Select Category</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Books">Books</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Clothes">Clothes</option>
+        <option value="Other">Other</option>
+      </select>
+      
+      <input name="condition" placeholder="New/Like New/Good/Fair" required>
+      <input name="image" type="file" accept="image/*">
+      
+      <button type="submit">Post Listing</button>
+    </form>
+  </div>
+</body>
+</html>
