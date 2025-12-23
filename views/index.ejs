@@ -20,6 +20,16 @@
   </nav>
 
   <main>
+      <form method="GET" action="/" class="search-bar">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search by title or category..."
+      value="<%= typeof q !== 'undefined' ? q : '' %>"
+    />
+    <button type="submit">Search</button>
+  </form>
+
     <h2>📦 Latest Listings</h2>
     <% if(listings.length === 0) { %>
       <p>No listings yet. <a href="/register">Create account</a> to start selling!</p>
