@@ -6,21 +6,20 @@
 </head>
 <body>
   <nav>
-  <h1>🏫 CampusCircle Mart</h1>
-  <div>
-    <a href="/">Home</a>
-    <% if (user) { %>
-      <a href="/my-listings">My Listings</a>
-      <a href="/listings/new">Sell Item</a>
-      <span>👋 <%= user.name %></span>
-      <a href="/logout">Logout</a>
-    <% } else { %>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    <% } %>
-  </div>
-</nav>
-
+    <h1>🏫 CampusCircle Mart</h1>
+    <div>
+      <a href="/">Home</a>
+      <% if (user) { %>
+        <a href="/my-listings">My Listings</a>
+        <a href="/listings/new">Sell Item</a>
+        <span>👋 <%= user.name %></span>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </div>
+  </nav>
 
   <main>
     <h2>🧾 My Listings</h2>
